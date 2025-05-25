@@ -7,6 +7,7 @@
  */
 
 const detector = require('../services/detector');
+const enhancedDetector = require('../services/enhanced-detector');
 const logger = require('../services/logger');
 const { shouldTrackPath, isSensitivePath } = require('../config/llm-signatures');
 
@@ -33,12 +34,17 @@ async function trackLLMActivity(req, res, next) {
       console.log(`⚠️  Sensitive path accessed: ${requestInfo.pageVisited} from ${requestInfo.clientIP}`);
     }
 
-    // Detect LLM company
-    const detection = await detector.detectLLMCompany(
-      requestInfo.userAgent, 
-      requestInfo.clientIP, 
-      requestInfo.hostname
-    );
+    // Try enhanced detection first (catches more cases)
+    let detection = await enhancedDetector.detectLLMActivity(req);
+    
+    // Fall back to standard detection if enhanced didn't find anything
+    if (!detection) {
+      detection = await detector.detectLLMCompany(
+        requestInfo.userAgent, 
+        requestInfo.clientIP, 
+        requestInfo.hostname
+      );
+    }
 
     if (detection) {
       // Prepare activity data for logging

@@ -195,6 +195,24 @@ const LLM_SIGNATURES = {
     description: 'ByteDance/TikTok AI crawlers'
   },
 
+  web_research: {
+    name: 'Web Research Bots',
+    userAgents: [
+      // Generic research bots that might be used by LLMs
+      'Mozilla/5.0 (compatible; research)',
+      'Mozilla/5.0 (compatible; web-research)',
+      'research-bot',
+      'web-crawler',
+      'content-fetcher',
+      'ai-research',
+      'llm-crawler',
+      'intelligent-agent'
+    ],
+    ipRanges: [],
+    asn: null,
+    description: 'Generic web research and AI-powered crawlers'
+  },
+
   misc_llm: {
     name: 'Other LLM',
     userAgents: [
@@ -215,7 +233,13 @@ const LLM_SIGNATURES = {
       'AI2Bot',
       'YouBot',
       'ChatGPT',
-      'GPT-4'
+      'GPT-4',
+      // Add more generic patterns that might indicate AI
+      'AI-Agent',
+      'intelligent-crawler',
+      'smart-bot',
+      'research-agent',
+      'content-analyzer'
     ],
     ipRanges: [],
     asn: null,
