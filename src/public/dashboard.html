@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 LLM Scraper Tracker Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 LLM Scraper Tracker Dashboard</h1>
+            <p>Monitoring AI company scraping activity on Synapticlabs.ai</p>
+            <div class="status-indicator">
+                <span id="system-status" class="status-online">✅ System Online</span>
+                <span id="last-updated">Last updated: <span id="update-time">Loading...</span></span>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="dashboard-nav">
+            <button class="nav-btn active" data-section="overview">📊 Overview</button>
+            <button class="nav-btn" data-section="activity">📋 Recent Activity</button>
+            <button class="nav-btn" data-section="companies">🏢 Companies</button>
+            <button class="nav-btn" data-section="guidance">🎯 Guidance Metrics</button>
+            <button class="nav-btn" data-section="system">⚙️ System Status</button>
+            <button class="nav-btn" data-section="test">🧪 Test Endpoints</button>
+        </nav>
+
+        <!-- Overview Section -->
+        <div id="overview" class="dashboard-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Activities</h3>
+                    <span class="stat-number" id="total-activities">Loading...</span>
+                    <small>Last 7 days</small>
+                </div>
+                <div class="stat-card">
+                    <h3>Unique Companies</h3>
+                    <span class="stat-number" id="unique-companies">Loading...</span>
+                    <small>Active scrapers</small>
+                </div>
+                <div class="stat-card">
+                    <h3>Guidance Rate</h3>
+                    <span class="stat-number" id="guidance-rate">Loading...</span>
+                    <small>Following guided paths</small>
+                </div>
+                <div class="stat-card">
+                    <h3>System Uptime</h3>
+                    <span class="stat-number" id="system-uptime">Loading...</span>
+                    <small>Hours online</small>
+                </div>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Company Activity Distribution</h3>
+                    <canvas id="company-chart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Daily Activity Trend</h3>
+                    <canvas id="trend-chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div id="activity" class="dashboard-section">
+            <div class="section-header">
+                <h2>📋 Recent LLM Activity</h2>
+                <div class="controls">
+                    <select id="company-filter">
+                        <option value="all">All Companies</option>
+                    </select>
+                    <button id="refresh-activity" class="btn-primary">🔄 Refresh</button>
+                </div>
+            </div>
+            <div class="table-card">
+                <div class="table-wrapper">
+                    <table id="activity-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Company</th>
+                                <th>Page</th>
+                                <th>Method</th>
+                                <th>Guided</th>
+                                <th>Country</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="6">Loading activity data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Companies Section -->
+        <div id="companies" class="dashboard-section">
+            <div class="section-header">
+                <h2>🏢 LLM Companies</h2>
+            </div>
+            <div class="companies-grid" id="companies-grid">
+                <div class="loading-card">Loading company data...</div>
+            </div>
+        </div>
+
+        <!-- Guidance Metrics Section -->
+        <div id="guidance" class="dashboard-section">
+            <div class="section-header">
+                <h2>🎯 Content Guidance Metrics</h2>
+            </div>
+            <div class="guidance-stats">
+                <div class="stat-card">
+                    <h3>Guided Path Rate</h3>
+                    <span class="stat-number" id="guided-rate">Loading...</span>
+                    <small>% following guided paths</small>
+                </div>
+                <div class="stat-card">
+                    <h3>Top Guided Page</h3>
+                    <span class="stat-text" id="top-guided-page">Loading...</span>
+                    <small>Most visited guided content</small>
+                </div>
+            </div>
+            <div class="table-card">
+                <h3>Top Scraped Pages</h3>
+                <div class="table-wrapper">
+                    <table id="pages-table">
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Total Scrapes</th>
+                                <th>Companies</th>
+                                <th>Guided</th>
+                                <th>Last Scraped</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="5">Loading page data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status Section -->
+        <div id="system" class="dashboard-section">
+            <div class="section-header">
+                <h2>⚙️ System Status</h2>
+            </div>
+            <div class="system-grid">
+                <div class="system-card">
+                    <h3>🗄️ Database</h3>
+                    <div id="db-status" class="status-indicator">Checking...</div>
+                </div>
+                <div class="system-card">
+                    <h3>🔗 API Endpoints</h3>
+                    <div class="api-endpoints">
+                        <div class="endpoint">
+                            <span>Statistics</span>
+                            <a href="/api/stats" target="_blank" class="btn-link">Test</a>
+                        </div>
+                        <div class="endpoint">
+                            <span>Recent Activity</span>
+                            <a href="/api/activity" target="_blank" class="btn-link">Test</a>
+                        </div>
+                        <div class="endpoint">
+                            <span>Guidance Metrics</span>
+                            <a href="/api/guidance" target="_blank" class="btn-link">Test</a>
+                        </div>
+                        <div class="endpoint">
+                            <span>Health Check</span>
+                            <a href="/health" target="_blank" class="btn-link">Test</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Endpoints Section -->
+        <div id="test" class="dashboard-section">
+            <div class="section-header">
+                <h2>🧪 Test LLM Detection</h2>
+            </div>
+            <div class="test-grid">
+                <div class="test-card">
+                    <h3>🔍 Test Detection</h3>
+                    <div class="test-form">
+                        <input type="text" id="test-user-agent" placeholder="Enter User-Agent string" 
+                               value="PerplexityBot/1.0 (+https://perplexity.ai/bot)">
+                        <input type="text" id="test-url" placeholder="Enter URL" 
+                               value="https://www.synapticlabs.ai/ai-education">
+                        <button id="test-detection" class="btn-primary">Test Detection</button>
+                    </div>
+                    <div id="test-results" class="test-results"></div>
+                </div>
+                <div class="test-card">
+                    <h3>📊 Webhook Status</h3>
+                    <div class="webhook-info">
+                        <p><strong>Webhook URL:</strong></p>
+                        <code id="webhook-url">Loading...</code>
+                        <button id="test-webhook" class="btn-primary">Test Webhook</button>
+                    </div>
+                    <div id="webhook-results" class="test-results"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>

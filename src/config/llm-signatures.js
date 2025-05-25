@@ -117,6 +117,84 @@ const LLM_SIGNATURES = {
     description: 'Meta AI and Facebook crawlers'
   },
 
+  microsoft: {
+    name: 'Microsoft AI',
+    userAgents: [
+      'bingbot',
+      'Bingbot',
+      'msnbot',
+      'Microsoft-CopilotBot',
+      'Copilot'
+    ],
+    ipRanges: [
+      // Microsoft/Bing IP ranges
+      '40.77.167.0/24',
+      '157.55.39.0/24',
+      '207.46.13.0/24'
+    ],
+    asn: 'AS8075', // Microsoft's ASN
+    description: 'Microsoft Copilot and Bing AI crawlers'
+  },
+
+  apple: {
+    name: 'Apple AI',
+    userAgents: [
+      'Applebot-Extended',
+      'Applebot',
+      'AppleNewsBot'
+    ],
+    ipRanges: [
+      // Apple IP ranges
+      '17.0.0.0/8'
+    ],
+    asn: 'AS714', // Apple's ASN
+    description: 'Apple Intelligence and Siri crawlers'
+  },
+
+  amazon: {
+    name: 'Amazon AI',
+    userAgents: [
+      'Amazonbot',
+      'Amazon-Bot',
+      'AlexaBot'
+    ],
+    ipRanges: [
+      // Amazon AWS IP ranges (subset)
+      '52.0.0.0/11',
+      '54.0.0.0/8'
+    ],
+    asn: 'AS16509', // Amazon's main ASN
+    description: 'Amazon Alexa and AWS AI crawlers'
+  },
+
+  cohere: {
+    name: 'Cohere AI',
+    userAgents: [
+      'cohere-ai',
+      'CohereBot',
+      'Cohere'
+    ],
+    ipRanges: [],
+    asn: null,
+    description: 'Cohere AI language model crawlers'
+  },
+
+  bytedance: {
+    name: 'ByteDance AI',
+    userAgents: [
+      'Bytespider',
+      'ByteDance',
+      'TikTokBot'
+    ],
+    ipRanges: [
+      // ByteDance IP ranges
+      '110.249.200.0/21',
+      '111.225.148.0/22'
+    ],
+    asn: 'AS55967', // ByteDance's ASN
+    description: 'ByteDance/TikTok AI crawlers'
+  },
+
   misc_llm: {
     name: 'Other LLM',
     userAgents: [
@@ -132,7 +210,6 @@ const LLM_SIGNATURES = {
       'AhrefsBot',
       'MJ12bot',
       'DotBot',
-      'BingBot',
       'YandexBot',
       'BaiduSpider',
       'AI2Bot',
@@ -151,11 +228,17 @@ const LLM_SIGNATURES = {
  * These represent high-value content that we want AI models to index
  */
 const GUIDED_PATHS = [
+  '/about',
+  '/flows',
+  '/agents',
+  '/chatbot',
+  '/ai-education',
+  '/bootcamps',
+  '/blog/',
   '/case-studies/',
   '/research/',
   '/ai-tools/',
   '/solutions/',
-  '/blog/',
   '/resources/',
   '/documentation/',
   '/whitepapers/',
