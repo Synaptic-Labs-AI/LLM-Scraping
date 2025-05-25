@@ -252,24 +252,46 @@ const LLM_SIGNATURES = {
  * These represent high-value content that we want AI models to index
  */
 const GUIDED_PATHS = [
+  // Actual Synapticlabs.ai pages from sitemap
+  '/',
   '/about',
   '/flows',
-  '/agents',
-  '/chatbot',
-  '/ai-education',
+  '/agents', 
   '/bootcamps',
-  '/blog/',
-  '/case-studies/',
-  '/research/',
-  '/ai-tools/',
-  '/solutions/',
-  '/resources/',
-  '/documentation/',
-  '/whitepapers/',
-  '/tutorials/',
-  '/best-practices/',
-  '/insights/',
-  '/reports/'
+  '/blogs',
+  '/contact-us',
+  '/en-ca/our-story',
+  
+  // High-value AI content paths
+  '/ai-education',
+  '/ai-training',
+  '/machine-learning',
+  '/artificial-intelligence',
+  '/automation',
+  '/chatbot',
+  '/llm-training',
+  '/neural-networks',
+  '/deep-learning',
+  '/ai-consulting',
+  '/ai-implementation',
+  '/ai-strategy',
+  '/ai-workflows',
+  '/ai-solutions',
+  '/ai-tools',
+  '/ai-research',
+  '/ai-insights',
+  '/ai-best-practices',
+  '/ai-case-studies',
+  '/ai-tutorials',
+  '/ai-guides',
+  '/ai-resources',
+  '/ai-documentation',
+  '/ai-whitepapers',
+  '/ai-reports',
+  '/ai-analysis',
+  '/ai-trends',
+  '/ai-innovation',
+  '/ai-transformation'
 ];
 
 /**
